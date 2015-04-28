@@ -1,7 +1,13 @@
 #!/bin/sh
 
 docker build -t varnish_build ./build
-docker run -v $(pwd)/build/build.sh:/build.sh -v $(pwd)/vmod:/usr/lib/varnish/vmods/ -t -i varnish_build
+docker run \
+  -v $(pwd)/build/build.sh:/build.sh \
+  -v $(pwd)/vmod:/usr/lib/varnish/vmods \
+  -t -i varnish_build
 
 docker build -t varnish_test ./test
-docker run -v $(pwd)/test/test.sh:/test.sh -v $(pwd)/vmod:/usr/lib/varnish/vmods/ -t -i varnish_test
+docker run \
+  -v $(pwd)/test/test.sh:/test.sh \
+  -v $(pwd)/vmod:/usr/lib/varnish/vmods/
+  -t -i varnish_test
